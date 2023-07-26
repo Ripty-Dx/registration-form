@@ -1,0 +1,20 @@
+.form-main {
+  background-color: white;
+  border-radius: 10px;
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column; */
+}
+.btn-primary {
+  background-color: rgb(130, 106, 252) !important;
+}
+input[type="radio"]#gender {
+  accent-color: rgb(130, 106, 252) !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+

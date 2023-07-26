@@ -1,5 +1,6 @@
 import React from "react";
 import "./MainPage.css";
+import Form from "./Form";
 const MainPage = () => {
   return (
     <>
@@ -10,9 +11,12 @@ const MainPage = () => {
             Registration <br></br> Form
           </h1>
         </div>
-        <div className="col-md-6">
-          <h1 className="text-white">Registration Form</h1>
+        
+        <div className="col-md-5">
+         <Form/>
         </div>
+        <div className="col-md-1"></div>
+
       </div>
     </>
   );
