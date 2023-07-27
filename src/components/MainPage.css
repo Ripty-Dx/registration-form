@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
 .main {
-  background-color: rgba(92, 9, 236, 0.9);
+  background-color: rgb(130,106,252);
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -22,9 +22,9 @@
   border-radius: 20px;
   margin: 20px;
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
   h1.main-text {
-    font-size: 7vmax;
+    font-size: 5vmax;
     margin: 10px;
   }
   div.main-text-border{
@@ -34,4 +34,13 @@
   div.main{
     flex-direction: column;
   }
+}
+@media (min-width:768px)  and (max-width: 980px){
+ h1.main-text{
+  display: none !important;
+ }
+ div.main-text-border{
+  display: none !important;
+ }
+  
 }
