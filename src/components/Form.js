@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./Form.css";
 const Form = () => {
-    const id = useRef(0);
+  const id = useRef(0);
   const [userData, setUserData] = useState({
     fullName: null,
     email: null,
@@ -14,16 +14,19 @@ const Form = () => {
   });
   const valueChange = (e) => {
     e.preventDefault();
-   
+
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmit=()=>{
-    id.current+=1;
-    window.localStorage.setItem(JSON.stringify(id.current), JSON.stringify(userData));
-  }
+  const onSubmit = () => {
+    id.current += 1;
+    window.localStorage.setItem(
+      JSON.stringify(id.current),
+      JSON.stringify(userData)
+    );
+  };
   // console.log(userData);
   return (
     <>
@@ -67,7 +70,7 @@ const Form = () => {
               onChange={valueChange}
             ></input>
           </div>
-          <div className="col-md-6 ">
+          <div className="col-md-6 dob">
             <label className="form-label">Birth Date</label>
             <input
               type="date"
@@ -98,7 +101,7 @@ const Form = () => {
               name="gender"
               onChange={valueChange}
             />{" "}
-            Female
+            <label className="form-label">Female</label>
           </div>
           <div className="col-md-auto ">
             <input
@@ -108,7 +111,7 @@ const Form = () => {
               name="gender"
               onChange={valueChange}
             />{" "}
-            Prefer not to say
+            <label className="form-label">Prefer not to say</label>
           </div>
         </div>
         <div className="row mt-2">
@@ -131,7 +134,7 @@ const Form = () => {
               className="form-control"
               onChange={valueChange}
             >
-              <option style={{ color: "darkgray" }} value="" selected disabled>
+              <option value="" selected disabled>
                 Country <span className="caret"></span>
               </option>
               <option value="India" name="country">
@@ -149,7 +152,7 @@ const Form = () => {
             <input
               type="number"
               className="form-control"
-              id=""
+              id="postalCodeID"
               placeholder="Enter postal code"
               name="postalCode"
               onChange={valueChange}
@@ -158,7 +161,9 @@ const Form = () => {
         </div>
         <div className="row mt-4">
           <div>
-            <button className="btn btn-primary form-control" onClick={onSubmit}>Submit</button>
+            <button className="btn btn-primary form-control" onClick={onSubmit}>
+              Submit
+            </button>
           </div>
         </div>
       </div>

@@ -17,4 +17,12 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+@media (max-width:600px){
+  div.dob{
+    margin-top: 0.5rem;
+  }
+  input#postalCodeID{
+    margin-top: 0.5rem;
+  }
+}
 
