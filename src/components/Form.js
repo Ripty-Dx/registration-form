@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Form.css";
 const Form = () => {
+  // const nameRegExp = /^[A-Za-z\s]*$/;
   const [userData, setUserData] = useState({
     fullName: null,
     email: null,
@@ -11,6 +12,17 @@ const Form = () => {
     address: null,
     country: null,
   });
+  let submitEnable = {
+    fullName: false,
+    email: false,
+    mobile: false,
+    postalCode: false,
+    dob: false,
+    gender: false,
+    address: false,
+    country: false,
+  };
+
   const valueChange = (e) => {
     e.preventDefault();
 
@@ -20,21 +32,87 @@ const Form = () => {
     });
   };
   const onSubmit = () => {
-    let userArray = JSON.parse(localStorage.getItem("User Data"));
-    if (userArray == null) {
-      userArray = [];
-      userArray.unshift(JSON.stringify(userData));
-      localStorage.setItem("User Data", JSON.stringify(userArray));
+    if (userData.fullName == null) {
+      document.getElementById("errorTextName").classList.remove("d-none");
+      document.getElementById("fullNameID").classList.add("showErrorInput");
     } else {
-      let alreadyExistingMail = userArray.filter((element) => {
-        return JSON.parse(element).email === userData.email;
-      });
-      // console.log(alreadyExistingMail);
-      if (alreadyExistingMail.length === 0) {
-        userArray.push(JSON.stringify(userData));
+      console.log(userData.fullName);
+      document.getElementById("errorTextName").classList.add("d-none");
+      document.getElementById("fullNameID").classList.remove("showErrorInput");
+      submitEnable.fullName = true;
+    }
+    if (userData.email == null) {
+      document.getElementById("errorTextEmail").classList.remove("d-none");
+      document.getElementById("emailID").classList.add("showErrorInput");
+    } else {
+      console.log(userData.email);
+
+      document.getElementById("errorTextEmail").classList.add("d-none");
+      document.getElementById("emailID").classList.remove("showErrorInput");
+      submitEnable.email = true;
+    }
+    if (userData.mobile == null) {
+      document.getElementById("errorTextMobile").classList.remove("d-none");
+      document.getElementById("mobileID").classList.add("showErrorInput");
+    } else {
+      console.log(userData.mobile);
+      document.getElementById("mobileID").classList.remove("showErrorInput");
+      document.getElementById("errorTextMobile").classList.add("d-none");
+      submitEnable.mobile = true;
+    }
+    if (userData.dob == null) {
+      document.getElementById("errorTextDob").classList.remove("d-none");
+      document.getElementById("dobID").classList.add("showErrorInput");
+    } else {
+      document.getElementById("errorTextDob").classList.add("d-none");
+      document.getElementById("dobID").classList.remove("showErrorInput");
+      submitEnable.dob = true;
+    }
+    console.log(submitEnable);
+    if (
+      submitEnable.fullName &&
+      submitEnable.email &&
+      submitEnable.mobile &&
+      submitEnable.dob
+    ) {
+      console.log("data saved");
+      //local storage validation
+      let userArray = JSON.parse(localStorage.getItem("User Data"));
+      if (userArray == null) {
+        userArray = [];
+        userArray.unshift(JSON.stringify(userData));
         localStorage.setItem("User Data", JSON.stringify(userArray));
+        setUserData({
+          fullName: null,
+          email: null,
+          mobile: null,
+          postalCode: null,
+          dob: null,
+          gender: null,
+          address: null,
+          country: null,
+        });
       } else {
-        alert("Your email already exists!!!Try with different email");
+        let alreadyExistingMail = userArray.filter((element) => {
+          return JSON.parse(element).email === userData.email;
+        });
+        // console.log(alreadyExistingMail);
+        if (alreadyExistingMail.length === 0) {
+          userArray.push(JSON.stringify(userData));
+          localStorage.setItem("User Data", JSON.stringify(userArray));
+          setUserData({
+            fullName: null,
+            email: null,
+            mobile: null,
+            postalCode: null,
+            dob: null,
+            gender: null,
+            address: null,
+            country: null,
+          });
+        } else {
+          alert("Your email already exists!!!Try with different email");
+        }
       }
     }
   };
@@ -47,12 +125,15 @@ const Form = () => {
             <label className="form-label">Full Name</label>
             <input
               type="text"
-              className="form-control"
-              id=""
+              className="form-control "
+              id="fullNameID"
               placeholder="Enter Full Name"
               name="fullName"
               onChange={valueChange}
             ></input>
+            <div className="form-text d-none text-danger" id="errorTextName">
+              Enter your valid full name
+            </div>
           </div>
         </div>
         <div className="row mt-2">
@@ -61,11 +142,14 @@ const Form = () => {
             <input
               type="email"
               className="form-control"
-              id=""
+              id="emailID"
               placeholder="Enter Email address"
               name="email"
               onChange={valueChange}
             ></input>
+            <div className="form-text d-none text-danger" id="errorTextEmail">
+              Enter your valid email address
+            </div>
           </div>
         </div>
         <div className="row mt-2">
@@ -74,21 +158,27 @@ const Form = () => {
             <input
               type="number"
               className="form-control"
-              id=""
+              id="mobileID"
               placeholder="Enter Mobile Number"
               name="mobile"
               onChange={valueChange}
             ></input>
+            <div className="form-text d-none text-danger" id="errorTextMobile">
+              Enter your valid mobile number
+            </div>
           </div>
           <div className="col-md-6 dob">
             <label className="form-label">Birth Date</label>
             <input
               type="date"
               className="form-control"
-              id=""
+              id="dobID"
               name="dob"
               onChange={valueChange}
             ></input>
+            <div className="form-text d-none text-danger" id="errorTextDob">
+              Enter your date of birth
+            </div>
           </div>
         </div>
         <div className="row mt-2">
