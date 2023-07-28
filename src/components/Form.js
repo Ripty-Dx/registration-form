@@ -1,7 +1,25 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Form.css";
 const Form = () => {
+  const fullNameRef=useRef(null)
+  const emailRef=useRef(null)
+  const mobileRef=useRef(null)
+  const postalCodeRef=useRef(null)
+  const dobRef=useRef(null)
+  const genderRef=useRef(null)
+  const addressRef=useRef(null)
+  const countryRef=useRef(null)
   // const nameRegExp = /^[A-Za-z\s]*$/;
+  const clearValues=()=>{
+    fullNameRef.current.value = null;
+          emailRef.current.value = null;
+          mobileRef.current.value = null;
+          dobRef.current.value = null;
+          addressRef.current.value = null;
+          postalCodeRef.current.value = null;
+          countryRef.current.value = "Country";
+          genderRef.current.value = null;
+  }
   const [userData, setUserData] = useState({
     fullName: null,
     email: null,
@@ -31,7 +49,8 @@ const Form = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (userData.fullName == null) {
       document.getElementById("errorTextName").classList.remove("d-none");
       document.getElementById("fullNameID").classList.add("showErrorInput");
@@ -92,6 +111,8 @@ const Form = () => {
           address: null,
           country: null,
         });
+        clearValues();
+
       } else {
         let alreadyExistingMail = userArray.filter((element) => {
           return JSON.parse(element).email === userData.email;
@@ -100,6 +121,8 @@ const Form = () => {
         if (alreadyExistingMail.length === 0) {
           userArray.push(JSON.stringify(userData));
           localStorage.setItem("User Data", JSON.stringify(userArray));
+          clearValues();
+          // fullNameRef.current.value = null;
           setUserData({
             fullName: null,
             email: null,
@@ -130,6 +153,7 @@ const Form = () => {
               placeholder="Enter Full Name"
               name="fullName"
               onChange={valueChange}
+              ref={fullNameRef}
             ></input>
             <div className="form-text d-none text-danger" id="errorTextName">
               Enter your valid full name
@@ -145,7 +169,7 @@ const Form = () => {
               id="emailID"
               placeholder="Enter Email address"
               name="email"
-              onChange={valueChange}
+              onChange={valueChange} ref={emailRef}
             ></input>
             <div className="form-text d-none text-danger" id="errorTextEmail">
               Enter your valid email address
@@ -161,7 +185,7 @@ const Form = () => {
               id="mobileID"
               placeholder="Enter Mobile Number"
               name="mobile"
-              onChange={valueChange}
+              onChange={valueChange} ref={mobileRef}
             ></input>
             <div className="form-text d-none text-danger" id="errorTextMobile">
               Enter your valid mobile number
@@ -174,7 +198,7 @@ const Form = () => {
               className="form-control"
               id="dobID"
               name="dob"
-              onChange={valueChange}
+              onChange={valueChange} ref={dobRef}
             ></input>
             <div className="form-text d-none text-danger" id="errorTextDob">
               Enter your date of birth
@@ -189,17 +213,17 @@ const Form = () => {
               id="gender"
               value="Male"
               name="gender"
-              onChange={valueChange}
+              onChange={valueChange} ref={genderRef}
             />{" "}
             <label className="form-label">Male</label>
           </div>
-          <div className="col-md-auto ">
+          <div className="col-md-auto " ref={genderRef}>
             <input
               type="radio"
               id="gender"
               value="Female"
               name="gender"
-              onChange={valueChange}
+              onChange={valueChange} ref={genderRef}
             />{" "}
             <label className="form-label">Female</label>
           </div>
@@ -209,7 +233,7 @@ const Form = () => {
               id="gender"
               value="Other"
               name="gender"
-              onChange={valueChange}
+              onChange={valueChange} ref={genderRef}
             />{" "}
             <label className="form-label">Prefer not to say</label>
           </div>
@@ -223,7 +247,7 @@ const Form = () => {
               id=""
               placeholder="Enter address"
               name="address"
-              onChange={valueChange}
+              onChange={valueChange} ref={addressRef}
             ></input>
           </div>
         </div>
@@ -232,9 +256,9 @@ const Form = () => {
             <select
               name="country"
               className="form-control"
-              onChange={valueChange}
+              onChange={valueChange} ref={countryRef}
             >
-              <option value="" selected disabled>
+              <option value="Country" selected disabled>
                 Country <span className="caret"></span>
               </option>
               <option value="India" name="country">
@@ -255,7 +279,7 @@ const Form = () => {
               id="postalCodeID"
               placeholder="Enter postal code"
               name="postalCode"
-              onChange={valueChange}
+              onChange={valueChange} ref={postalCodeRef}
             ></input>
           </div>
         </div>
