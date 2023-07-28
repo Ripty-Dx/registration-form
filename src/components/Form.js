@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./Form.css";
 const Form = () => {
-  const id = useRef(0);
   const [userData, setUserData] = useState({
     fullName: null,
     email: null,
@@ -21,13 +20,24 @@ const Form = () => {
     });
   };
   const onSubmit = () => {
-    id.current += 1;
-    window.localStorage.setItem(
-      JSON.stringify(id.current),
-      JSON.stringify(userData)
-    );
+    let userArray = JSON.parse(localStorage.getItem("User Data"));
+    if (userArray == null) {
+      userArray = [];
+      userArray.unshift(JSON.stringify(userData));
+      localStorage.setItem("User Data", JSON.stringify(userArray));
+    } else {
+      let alreadyExistingMail = userArray.filter((element) => {
+        return JSON.parse(element).email === userData.email;
+      });
+      // console.log(alreadyExistingMail);
+      if (alreadyExistingMail.length === 0) {
+        userArray.push(JSON.stringify(userData));
+        localStorage.setItem("User Data", JSON.stringify(userArray));
+      } else {
+        alert("Your email already exists!!!Try with different email");
+      }
+    }
   };
-  // console.log(userData);
   return (
     <>
       <div className="col-md-auto m-3 p-4 form-main">
