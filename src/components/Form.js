@@ -17,7 +17,7 @@ const Form = () => {
           dobRef.current.value = null;
           addressRef.current.value = null;
           postalCodeRef.current.value = null;
-          countryRef.current.value = null;
+          countryRef.current.value = "Country";
           genderRef.current.value = null;
   }
   const [userData, setUserData] = useState({
@@ -258,7 +258,7 @@ const Form = () => {
               className="form-control"
               onChange={valueChange} ref={countryRef}
             >
-              <option value="" selected disabled>
+              <option value="Country" selected disabled>
                 Country <span className="caret"></span>
               </option>
               <option value="India" name="country">
