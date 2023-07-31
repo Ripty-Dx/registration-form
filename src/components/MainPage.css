@@ -6,6 +6,8 @@
   width: 100%;
   justify-content: center;
   align-items: center;
+  background-attachment: fixed;
+
 }
 .main-text {
   font-family: "Poppins", sans-serif;
