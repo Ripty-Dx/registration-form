@@ -157,32 +157,32 @@ const Form = () => {
             <div className="col-md-auto ">
               <input
                 type="radio"
-                id="gender"
+                id="male"
                 value="Male"
                 name="gender"
                 onChange={valueChange}
               />{" "}
-              <label className="form-label">Male</label>
+              <label className="form-label" for="male" style={{cursor:"pointer"}}>Male</label>
             </div>
             <div className="col-md-auto ">
               <input
                 type="radio"
-                id="gender"
+                id="female"
                 value="Female"
                 name="gender"
                 onChange={valueChange}
               />{" "}
-              <label className="form-label">Female</label>
+              <label className="form-label" for="female" style={{cursor:"pointer"}}>Female</label>
             </div>
             <div className="col-md-auto ">
               <input
                 type="radio"
-                id="gender"
+                id="notToSay"
                 value="Other"
                 name="gender"
                 onChange={valueChange}
               />{" "}
-              <label className="form-label">Prefer not to say</label>
+              <label className="form-label" for="notToSay" style={{cursor:"pointer"}}>Prefer not to say</label>
             </div>
             <div className="form-text d-none text-danger errorMessage">
               Pick one option
